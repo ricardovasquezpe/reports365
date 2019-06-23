@@ -38,15 +38,15 @@ module.exports = function(app, jwt){
   app.post('/api/register', function(req, res){
     req.check('name', 'Invalid name').notEmpty();
     req.check('lastname', 'Invalid last name').notEmpty();
-    req.check('username', 'Invalid username').notEmpty();
+    req.check('email', 'Invalid email').notEmpty();
+    req.check('email', 'Invalid email format email').isEmail();
+    /*req.check('username', 'Invalid username').notEmpty();
     req.check('password', 'Invalid password').notEmpty();
     req.check('password', 'Invalid length for password').len(6, 20);
     req.check('confirmpassword', 'Invalid confirm password').notEmpty();
     req.check('confirmpassword', 'Confirm password should be equals').equals(req.body.password)
     req.check('birthdate', 'Invalid birthdate').notEmpty();
-    req.check('birthdate', 'Invalid dateformat birthdate').isDate();
-    req.check('email', 'Invalid email').notEmpty();
-    req.check('email', 'Invalid email format email').isEmail();
+    req.check('birthdate', 'Invalid dateformat birthdate').isDate();*/
 
     var error = req.validationErrors();
     if(error){
@@ -56,10 +56,12 @@ module.exports = function(app, jwt){
       );
       return;
     }
-    req.body.created_at = new Date();
+    var rand = Math.floor(Math.random() * 1000)
+    req.body.username = req.body.name + "." + req.body.lastname + "" + rand;
     var newUser = User(req.body);
     newUser.save(function(err) {
       if (err){
+        console.log(err);
         if(err.code == 11000){
             res.json(
               {"status" : false,
