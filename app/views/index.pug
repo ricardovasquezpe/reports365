@@ -9,7 +9,7 @@ head
   // Title
   title reports365 - Soluciones a tu alcanze
   // Necessary CSS Files
-  // <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">	 	<!-- Google Font
+  // <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">    <!-- Google Font
   link(href='css/bootstrap.min.css' rel='stylesheet')
   // bootstrap
   link(href='css/style.css' rel='stylesheet')
@@ -54,11 +54,9 @@ head
                 li
                   a(href='#features') Soluciones
                 li
+                  a(href='#works') Factura / Boleta electrónica
+                li
                   a(href='#works') Como funciona
-                li
-                  a(href='#pricing') Precios
-                li
-                  a(href='#freetrial') Demo gratuita
                 li
                   a(href='#contact') Contactenos
     .row
@@ -276,7 +274,7 @@ head
   </div
 // Description End
 // Description Two Colom
-.section-two-colom
+#factura.section-two-colom
   .container
     .row
       .col-xs-12.col-sm-12.col-md-5
@@ -284,9 +282,9 @@ head
           .left-heading
             span
               img(src='images/system-icon.png' alt='system-icon')
-            h2 Sistema en tiempo real
+            h2 Facturas y Boletas Electrónicas
           p.p
-            | En la plataform web podr&aacute; ver sus reportes customizados en tiempo real, aplicar filtros, comparar datos por fechas y muchas cosas m&aacute;s. Ademas de poder descargar los reportes generados en tiempo real y poder almacernarlos y compartirlos por correo
+            | Factura electrónica, boleta electrónica, nota de crédito electrónica, nota de débito electrónica y muchas cosas más. Ademas de exportarlos en un archivo .XML en base al formato UBL 2.0 y 2.1. Y firma con el certificado digital que sunat exige. 
           .clear  
           p
           a.acc(href='#contact') Contactenos
@@ -320,77 +318,6 @@ head
 // screens End
 // Testimonials
 // testimonials End
-// Pricing
-#pricing.section9.dark-section
-  .pricing-bg.dark-color-bg
-  .container
-    .pricing-inner-container
-      .col-lg-12.col-md-12.col-sm-12
-        .heading
-          span Nuestros precios
-          h2 El recomendado para tu negocio
-      .pricing-boxes
-        .col-lg-4.col-md-4.col-sm-4.pos.module
-          .plan.wow.fadeInUp(data-wow-duration='1s' style='visibility: visible; animation-duration: 1s; animation-name: fadeInUp;')
-            .plan-ttl
-              span Plan B&aacute;sico
-              h3
-                strong.currency-sign S/.
-                | 200
-                strong.plan-time /mes
-            ul
-              li.yes
-                span 3 reportes customizados
-              li.yes
-                span Descargas ilimitadas
-              li.yes
-                span 1 GB de Reportes guardados
-              li.no
-                span Sistema de reportes enviados por correo
-              li.no
-                span Sistema a tiempo real
-            // div class="plan-btn"><a href="#">Elegir plan</a></div
-        .col-lg-4.col-md-4.col-sm-4.pos.module
-          .plan.wow.fadeInUp(data-wow-duration='2s' style='visibility: visible; animation-duration: 2s; animation-name: fadeInUp;')
-            .plan-ttl.prefered
-              span Plan Silver
-              h3
-                strong.currency-sign S/.
-                | 350
-                strong.plan-time /Mes
-            ul
-              li.yes
-                span 7 reportes customizados
-              li.yes
-                span Descargas ilimitadas
-              li.yes
-                span 3 GB de Reportes guardados
-              li.yes
-                span Sistema de reportes enviados por correo
-              li.no
-                span Sistema a tiempo real
-            // div class="plan-btn"><a href="#">Elegir plan</a></div
-        .col-lg-4.col-md-4.col-sm-4.pos.module
-          .plan.wow.fadeInUp(data-wow-duration='3s' style='visibility: visible; animation-duration: 3s; animation-name: fadeInUp;')
-            .plan-ttl
-              span Plan Dorado
-              h3
-                strong.currency-sign S/.
-                | 450
-                strong.plan-time /Mes
-            ul
-              li.yes
-                span 12 reportes customizados
-              li.yes
-                span Descargas ilimitadas
-              li.yes
-                span 6 GB de Reportes guardados
-              li.yes
-                span Sistema de reportes enviados por correo
-              li.yes
-                span Sistema a tiempo real
-            // div class="plan-btn"><a href="#">Elegir plan</a></div
-// pricing End
 // Clients Logo
 //
   div class="section12">
@@ -429,25 +356,8 @@ head
   </div>
   </div>
   </div>
-  </div
+  </div>
 // Clients Logo End
-// Freetrial
-#freetrial.section13
-  .container
-    .row
-      .col-lg-12.col-md-12.col-sm-12.wow.flipInX(data-wow-duration='3s' style='visibility: visible; animation-duration: 3s; animation-name: flipInX;')
-        .heading
-          span Comenzemos!
-          h2 Empieza tu demo gratuita
-        .form
-          input(type='text' placeholder='Nombres')
-          input(type='text' placeholder='Apellidos')
-          input(type='text' placeholder='Correo')
-          button Registrate
-          p
-            | Al registrarte te llegar&aacute; un usuario y contrase&ntilde;a con el que podras empezar tu demo gratuita
-// freetrial End
-// footer
 // Contact Details
 #contact.section14.gray-bg
   .container
@@ -465,7 +375,7 @@ head
           .footer-box-content
             h4 Escribenos
             p Obten m&aacute;s informaci&oacute;n atravez de nuestro correo electronico
-            a.acc(href='mailto:ricardo.vasquez.pe@gmail.com?Subject=Informacion%20reports365') Escribir
+            a.acc(href='mailto:inforeports365@gmail.com?Subject=Informacion%20reports365') Escribir
       .col-lg-4.col-md-4.col-sm-4
         .fool-box.wow.fadeInDown(data-wow-duration='1s' style='visibility: visible; animation-duration: 1s; animation-name: fadeInDown;')
           i.icofont.icofont-download-alt
