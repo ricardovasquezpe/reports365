@@ -53,6 +53,6 @@ require('./db/model/jobModel.js')(app, jwt);
 require('./db/model/bidModel.js')(app, jwt);
 require('./db/model/favoriteModel.js')(app, jwt);
 
-var port = process.env.PORT || 8000;
+var port = process.env.PORT || 3000;
 app.listen(port);
 console.log("Reports365 project");
