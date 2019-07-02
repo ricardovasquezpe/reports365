@@ -3,6 +3,11 @@ head
   meta(http-equiv='X-UA-Compatible' content='IE=edge')
   meta(name='viewport' content='width=device-width, initial-scale=1')
   meta(name='theme-color', content='#27ae5f')
+  meta(property='og:image' content='images/bandage_fb.png')
+  meta(property='og:type' content='website')
+  meta(property='og:url' content='https://www.reports365.me/')
+  meta(property='og:title' content='Reports365.me')
+  meta(property='og:description' content='Reportes customizados, descargables y boleta/facturas electrónicas')
   // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
   meta(name='description' content='One Page Corporate HTML Template')
   meta(name='author' content='')
@@ -534,3 +539,20 @@ script.
   }
   });
   });
+  #fb-root
+script.
+  window.fbAsyncInit = function() {
+  FB.init({
+  xfbml : true,
+  version : 'v3.3'
+  });
+  };
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/es_LA/sdk/xfbml.customerchat.js';
+  fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+// Your customer chat code
+.fb-customerchat(attribution='setup_tool' page_id='2146570798936791' theme_color='#27ae5f' logged_in_greeting='Hola!, en que te podemos ayudar?' logged_out_greeting='Hola!, en que te podemos ayudar?')
