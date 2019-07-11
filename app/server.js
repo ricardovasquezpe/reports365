@@ -7,10 +7,10 @@ var path             = require('path');
 var jwt              = require('jsonwebtoken');
 var app              = express();
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 var apiRoutes        = express.Router(); 
-mongoose.connect("mongodb+srv://admin:123@reports365-tmji7.mongodb.net/test?retryWrites=true&w=majority");
+mongoose.connect("mongodb://admin:123@reports365-shard-00-00-tmji7.mongodb.net:27017,reports365-shard-00-01-tmji7.mongodb.net:27017,reports365-shard-00-02-tmji7.mongodb.net:27017/bolefact?ssl=true&replicaSet=reports365-shard-0&authSource=admin&retryWrites=true&w=majority");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
@@ -41,8 +41,14 @@ apiRoutes.use(function(req, res, next) {
   }
 });
 
+//VIEWS
+require('./controllers/index.js')(app);
+require('./controllers/app/login.js')(app);
+require('./controllers/app/dashboard/dashboard.js')(app);
+require('./controllers/app/documents/boletas.js')(app);
+require('./controllers/app/administration/productos.js')(app);
+
 //MODELS
-require('./db/model/index.js')(app);
 require('./db/model/userModel.js')(app, jwt);
 
 //INIT

@@ -13,7 +13,7 @@ module.exports = function(app, jwt){
       return;
     }
 
-    User.findOne({ username : req.body.username, 'password': req.body.password}, { '_id': 1, 'username' : 1, 'password': 1}, function(err, user) {
+    User.findOne({ 'username' : req.body.username, 'password': req.body.password}, { '_id': 1, 'username' : 1, 'password': 1}, function(err, user) {
       if(!user){
         res.json(
           {"status" : false,
@@ -40,10 +40,10 @@ module.exports = function(app, jwt){
     req.check('lastname', 'Invalid last name').notEmpty();
     req.check('email', 'Invalid email').notEmpty();
     req.check('email', 'Invalid email format email').isEmail();
-    /*req.check('username', 'Invalid username').notEmpty();
+    //req.check('username', 'Invalid username').notEmpty();
     req.check('password', 'Invalid password').notEmpty();
     req.check('password', 'Invalid length for password').len(6, 20);
-    req.check('confirmpassword', 'Invalid confirm password').notEmpty();
+    /*req.check('confirmpassword', 'Invalid confirm password').notEmpty();
     req.check('confirmpassword', 'Confirm password should be equals').equals(req.body.password)
     req.check('birthdate', 'Invalid birthdate').notEmpty();
     req.check('birthdate', 'Invalid dateformat birthdate').isDate();*/
