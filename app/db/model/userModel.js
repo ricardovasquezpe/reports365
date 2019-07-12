@@ -61,7 +61,6 @@ module.exports = function(app, jwt){
     var newUser = User(req.body);
     newUser.save(function(err) {
       if (err){
-        console.log(err);
         if(err.code == 11000){
             res.json(
               {"status" : false,

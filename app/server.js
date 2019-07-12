@@ -55,9 +55,11 @@ require('./db/model/userModel.js')(app, jwt);
 app.use('/api', apiRoutes);
 
 //MODELS
-require('./db/model/jobModel.js')(app, jwt);
+/*require('./db/model/jobModel.js')(app, jwt);
 require('./db/model/bidModel.js')(app, jwt);
-require('./db/model/favoriteModel.js')(app, jwt);
+require('./db/model/favoriteModel.js')(app, jwt);*/
+
+require('./db/model/productModel.js')(app, jwt);
 
 var port = process.env.PORT || 3000;
 app.listen(port);

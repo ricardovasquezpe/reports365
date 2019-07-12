@@ -20,6 +20,7 @@
     <!-- End plugin css for this page-->
     <!-- inject:css-->
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../vendors/loading/loading.css">
     <!-- endinject-->
     <link rel="shortcut icon" href="../images/favicon.png">
 </head>
@@ -35,6 +36,8 @@
                 </li>
             </ul><button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas"><span class="icon-menu"></span></button></div>
     </nav>
+
+    <div class="fullloading">Loading&#8230;</div>
     <!-- partial-->
     <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_sidebar.html-->
@@ -79,7 +82,7 @@
                                     <div class="col-lg-6 text-right"><button class="btn btn-primary" type="button" onclick="$('#createProduct').modal('toggle');">Crear Producto</button></div>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="table table-striped">
+                                    <table class="table table-striped" id="mainTableProducts">
                                         <thead>
                                             <tr>
                                                 <th>C&oacute;digo</th>
@@ -94,27 +97,6 @@
                                                 <td>#10293</td>
                                                 <td>Producto x</td>
                                                 <td>Categoria 3</td>
-                                                <td>S/.20</td>
-                                                <td class="text-center"><i class="mdi mdi-eye-outline icon-md"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>#10293</td>
-                                                <td>Producto y</td>
-                                                <td>Categoria 2</td>
-                                                <td>S/.20</td>
-                                                <td class="text-center"><i class="mdi mdi-eye-outline icon-md"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>#10293</td>
-                                                <td>Producto z</td>
-                                                <td>Categoria 1</td>
-                                                <td>S/.20</td>
-                                                <td class="text-center"><i class="mdi mdi-eye-outline icon-md"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>#10293</td>
-                                                <td>Producto k</td>
-                                                <td>Categoria 2</td>
                                                 <td>S/.20</td>
                                                 <td class="text-center"><i class="mdi mdi-eye-outline icon-md"></i></td>
                                             </tr>
@@ -182,17 +164,7 @@
 <script src="../vendors/daterangepicker/daterangepicker.min.js"></script>
 <!-- End plugin js for this page-->
 <!-- Custom js for this page-->
-<script src="../js/dashboard.js"></script>
+<script src="../js/base.js"></script>
+<script src="../js/products.js"></script>
 <!-- End custom js for this page-->
-<script type="text/javascript">
-    moment.locale('es');
-    $('#fechas').daterangepicker({
-        "locale": {
-            "applyLabel": "Aplicar",
-            "cancelLabel": "Cerrar",
-            "fromLabel": "Desde",
-            "toLabel": "Hasta"
-        }
-    });
-</script>
 <!-- Mirrored from www.templatewatch.com/regal-free/template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jul 2019 15:39:50 GMT-->
