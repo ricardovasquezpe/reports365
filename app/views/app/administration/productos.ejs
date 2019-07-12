@@ -58,7 +58,13 @@
                                         <div class="form-group"><label>Nombre</label><input class="form-control" type="text" placeholder="Nombre" aria-label="Username"></div>
                                     </div>
                                     <div class="col-lg-3">
-                                        <div class="form-group"><label for="exampleFormControlSelect1">Categoria</label><select class="form-control form-control" id="exampleFormControlSelect1" style="height: 45px;"><option>Categoria 1</option><option>Categoria 2</option><option>Categoria 3</option></select></div>
+                                        <div class="form-group">
+                                            <label for="mainSelectCategory">Categoria</label>
+                                                <select class="form-control form-control" id="mainSelectCategory" style="height: 45px;">
+                                                <option value="">Seleccion Categoria</option>
+                                            
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-lg-2">
                                         <div class="form-group"><label>Monto mayor a</label><input class="form-control" type="text" placeholder="Monto" aria-label="Monto"></div>
@@ -79,7 +85,7 @@
                                     <div class="col-lg-6 align-self-center">
                                         <h4 class="card-title">Productos</h4>
                                     </div>
-                                    <div class="col-lg-6 text-right"><button class="btn btn-primary" type="button" onclick="$('#createProduct').modal('toggle');">Crear Producto</button></div>
+                                    <div class="col-lg-6 text-right"><button class="btn btn-primary" type="button" onclick="$('#createProductModal').modal('toggle');">Crear Producto</button></div>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-striped" id="mainTableProducts">
@@ -93,13 +99,6 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>#10293</td>
-                                                <td>Producto x</td>
-                                                <td>Categoria 3</td>
-                                                <td>S/.20</td>
-                                                <td class="text-center"><i class="mdi mdi-eye-outline icon-md"></i></td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -108,7 +107,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal" id="createProduct" tabindex="-1" role="dialog">
+            <div class="modal" id="createProductModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -116,23 +115,28 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="form-group"><label for="exampleInputUsername1">C&oacute;digo</label><input class="form-control" id="exampleInputUsername1" type="text" placeholder="Código"></div>
+                                    <div class="form-group"><label for="createProductCode">C&oacute;digo</label><input class="form-control" id="createProductCode" type="text" placeholder="Código"></div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="form-group"><label for="exampleInputUsername1">Nombre</label><input class="form-control" id="exampleInputUsername1" type="text" placeholder="Nombre"></div>
+                                    <div class="form-group"><label for="createProductName">Nombre</label><input class="form-control" id="createProductName" type="text" placeholder="Nombre"></div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="form-group"><label for="exampleInputUsername1">Precio</label><input class="form-control" id="exampleInputUsername1" type="text" placeholder="Precio"></div>
+                                    <div class="form-group"><label for="createProductPrice">Precio</label><input class="form-control" id="createProductPrice" type="text" placeholder="Precio"></div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="form-group"><label for="exampleInputUsername1">Cantidad Inicial</label><input class="form-control" id="exampleInputUsername1" type="text" placeholder="Cantidad"></div>
+                                    <div class="form-group"><label for="createProductQuantity">Cantidad Inicial</label><input class="form-control" id="createProductQuantity" type="text" placeholder="Cantidad"></div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="form-group"><label for="exampleFormControlSelect1">Categoria</label><select class="form-control form-control" id="exampleFormControlSelect1" style="height: 45px;"><option>Categoria 1</option><option>Categoria 2</option><option>Categoria 3</option></select></div>
+                                    <div class="form-group">
+                                        <label for="createProductSelectCategory">Categoria</label>
+                                        <select class="form-control form-control" id="createProductSelectCategory" style="height: 45px;">
+                                                <option value="">Seleccion Categoria</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer"><button class="btn btn-secondary" type="button" data-dismiss="modal">Cerrar</button><button class="btn btn-primary" type="button">Crear</button></div>
+                        <div class="modal-footer"><button class="btn btn-secondary" type="button" data-dismiss="modal">Cerrar</button><button class="btn btn-primary" type="button" onclick="createProduct()">Crear</button></div>
                     </div>
                 </div>
             </div>

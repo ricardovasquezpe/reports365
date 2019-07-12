@@ -7,3 +7,7 @@ function getToken(){
 		return;
 	}
 }
+
+function hideLoading(){
+	$(".fullloading").hide();
+}
