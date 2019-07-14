@@ -47,6 +47,8 @@ require('./controllers/app/login.js')(app);
 require('./controllers/app/dashboard/dashboard.js')(app);
 require('./controllers/app/documents/boletas.js')(app);
 require('./controllers/app/administration/productos.js')(app);
+require('./controllers/app/configuration/empresa.js')(app);
+require('./controllers/app/configuration/perfil.js')(app);
 
 //MODELS
 require('./db/model/userModel.js')(app, jwt);

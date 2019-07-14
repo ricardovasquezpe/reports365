@@ -4,7 +4,7 @@ module.exports = function(app, jwt){
   app.post('/api/createproduct', function(req, res){
     req.check('code', 'Invalid code').notEmpty();
     req.check('name', 'Invalid name').notEmpty();
-    req.check('category', 'Invalid category').notEmpty();
+    //req.check('category', 'Invalid category').notEmpty();
     req.check('price', 'Invalid price').notEmpty();
     req.check('quantity', 'Invalid quantity').notEmpty();
     

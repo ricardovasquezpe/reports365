@@ -85,7 +85,7 @@ function createProduct(){
                 var htmlstring = "<tr>"+
                                      "<td>"+code+"</td>"+
                                      "<td>"+name+"</td>"+
-                                     "<td>"+getCategoryName(quantity)+"</td>"+
+                                     "<td>"+getCategoryName(category)+"</td>"+
                                      "<td>S/."+price+"</td>"+
                                      '<td class="text-center"><i class="mdi mdi-eye-outline icon-md"></i></td>'
                                    +"</tr>";
@@ -100,6 +100,9 @@ function createProduct(){
 }
 
 function getCategoryName(id){
+    if(!id){
+        return "-";
+    }
     $.each(categories, function() {
         if(this._id == id){
             id = this.name;
