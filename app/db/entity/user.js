@@ -9,6 +9,7 @@ var userSchema = new Schema({
   email		   : { type: String, required: true, unique: true },
   type		   : String,
   birthdate	 : Date,
+  company_id : { type: String, required: true},
   created_at : { type: Date, default: Date.now },
   updated_at : { type: Date, default: Date.now }
 });
