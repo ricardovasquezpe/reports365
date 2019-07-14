@@ -13,7 +13,7 @@ module.exports = function(app, jwt){
       return;
     }
 
-    User.findOne({ 'username' : req.body.username, 'password': req.body.password}, { '_id': 1, 'username' : 1, 'password': 1, 'company_id': 1}, function(err, user) {
+    User.findOne({ 'username' : req.body.username, 'password': req.body.password}, { '_id': 1, 'company_id': 1}, function(err, user) {
       if(!user){
         res.json(
           {"status" : false,
