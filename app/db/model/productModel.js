@@ -4,7 +4,7 @@ module.exports = function(app, jwt){
   app.post('/api/createproduct', function(req, res){
     req.check('code', 'Invalid code').notEmpty();
     req.check('name', 'Invalid name').notEmpty();
-    //req.check('category', 'Invalid category').notEmpty();
+    //req.check('category_id', 'Invalid category').notEmpty();
     req.check('price', 'Invalid price').notEmpty();
     req.check('quantity', 'Invalid quantity').notEmpty();
     
@@ -62,6 +62,65 @@ module.exports = function(app, jwt){
         );
       return;
      });
+  });
+
+  app.get('/api/productdetail/:id', function(req, res){
+    Product.findById(req.params.id, function (err, product) {
+
+        if (!product){
+            res.json(
+              {"status" : false,
+               "data"   : "Products not found"}
+            );
+          return;
+        }
+
+        res.json(
+          {"status" : true,
+           "data"   : product}
+        );
+      return;
+     });
+  });
+
+  app.put('/api/updateproduct', function(req, res){
+    req.check('code', 'Invalid code').notEmpty();
+    req.check('name', 'Invalid name').notEmpty();
+    //req.check('category_id', 'Invalid category').notEmpty();
+    req.check('price', 'Invalid price').notEmpty();
+    req.check('quantity', 'Invalid quantity').notEmpty();
+    req.check('_id', 'Invalid _id').notEmpty();
+    
+    var error = req.validationErrors();
+    if(error){
+      res.json(
+        {"status" : false,
+         "data"   : error}
+      );
+      return;
+    }
+    var _id = req.body._id;
+    delete req.body['_id'];
+    Product.findByIdAndUpdate(
+        _id,
+        req.body,
+        {new: true},
+        (err, product) => {
+          if (!product){
+                res.json(
+                  {"status" : false,
+                   "data"   : "product not found"}
+                );
+              return;
+            }
+
+            res.json(
+              {"status" : true,
+               "data"   : "product updated"}
+            );
+          return;
+        }
+    )
   });
 
 }

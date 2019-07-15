@@ -5,7 +5,7 @@ var productSchema = new Schema({
   code         : { type: String, required: true, unique: true },
   name         : { type: String, required: true },
   price        : { type: Number, required: true },
-  category     : { type: String },
+  category_id  : { type: String },
   quantity     : { type: Number, required: true },
   created_at   : { type: Date, default: Date.now },
   updated_at   : { type: Date, default: Date.now }
