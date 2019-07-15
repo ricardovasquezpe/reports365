@@ -106,9 +106,10 @@ function createProduct(){
                 var htmlstring = "<tr>"+
                                      "<td>"+code+"</td>"+
                                      "<td>"+name+"</td>"+
-                                     "<td>"+getCategoryName(category)+"</td>"+
-                                     "<td>S/."+price+"</td>"+
-                                     '<td class="text-center"><i class="mdi mdi-eye-outline icon-md"></i></td>'
+                                     "<td value='"+category+"'>"+getCategoryName(category)+"</td>"+
+                                     "<td>"+price+"</td>"+
+                                     "<td>"+quantity+"</td>"+
+                                     '<td class="text-center"><i class="mdi mdi-pencil-outline icon-md" style="cursor:pointer" onclick="getProductDetails(this, '+"'"+ data.data +"'"+')"></i></td>'
                                    +"</tr>";
                 $("#mainTableProducts").prepend(htmlstring);
             }else if(data.data){

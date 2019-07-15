@@ -18,8 +18,7 @@ module.exports = function(app, jwt){
     }
 
     var newProduct = Product(req.body);
-    newProduct.save(function(err) {
-      console.log(err);
+    newProduct.save(function(err, product) {
       if (err){
         if(err.code == 11000){
             res.json(
@@ -37,7 +36,7 @@ module.exports = function(app, jwt){
 
       res.json(
         {"status" : true,
-         "data"   : 'Product created!'}
+         "data"   : product._id}
       );
       return;
 
