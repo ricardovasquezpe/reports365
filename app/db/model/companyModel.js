@@ -82,8 +82,7 @@ module.exports = function(app, jwt){
   });
 
   app.get('/api/mycompanydetails', function(req, res){
-    console.log(req.decoded._doc);
-    Company.find().exec(function(err, company) { 
+    Company.findById(req.decoded._doc.company_id, function (err, company) {
 
         if (!company){
             res.json(
