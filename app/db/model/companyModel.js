@@ -4,6 +4,7 @@ module.exports = function(app, jwt){
 
   app.post('/api/createcompany', function(req, res){
     req.check('name', 'Invalid name').notEmpty();
+    req.check('businessName', 'Invalid businessName').notEmpty();
     req.check('ruc', 'Invalid ruc').notEmpty();
     req.check('address', 'Invalid address').notEmpty();
     req.check('telephone', 'Invalid telephone').notEmpty();
@@ -46,6 +47,7 @@ module.exports = function(app, jwt){
 
   app.put('/api/updatemycompany', function(req, res){
     req.check('name', 'Invalid name').notEmpty();
+    req.check('businessName', 'Invalid businessName').notEmpty();
     req.check('ruc', 'Invalid ruc').notEmpty();
     req.check('address', 'Invalid address').notEmpty();
     req.check('telephone', 'Invalid telephone').notEmpty();

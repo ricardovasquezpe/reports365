@@ -21,9 +21,11 @@ function getCompanyDetails(){
         success: function(data){
             if(data.status){
                 $("#name").val(data.data.name);
+                $("#businessName").val(data.data.businessName);
                 $("#ruc").val(data.data.ruc);
                 $("#address").val(data.data.address);
                 $("#telephone").val(data.data.telephone);
+                $("#email").val(data.data.email);
             }
             hideLoading();
         }
@@ -31,11 +33,13 @@ function getCompanyDetails(){
 }
 
 function updateCompany(){
-	var name      = $("#name").val();
- 	var ruc       = $("#ruc").val();
- 	var address   = $("#address").val();
- 	var telephone = $("#telephone").val();
-    var sendData  = {'name': name,'ruc':ruc,'address':address,'telephone':telephone};
+	var name         = $("#name").val();
+    var businessName = $("#businessName").val();
+ 	var ruc          = $("#ruc").val();
+ 	var address      = $("#address").val();
+ 	var telephone    = $("#telephone").val();
+    var email        = $("#email").val();
+    var sendData     = {'name': name, 'businessName': businessName,'ruc':ruc,'address':address,'telephone':telephone,'email':email};
     $.ajax({
         type : 'PUT',
         url : '/api/updatemycompany',
