@@ -10,8 +10,10 @@ var boletaSchema = new Schema({
   mtoOperInafectas  : { type: Number, required: true },
   mtoIgv            : { type: Number, required: true },
   mtoImpVenta       : { type: Number, required: true },
-  cliente           : [Schema.Types.Mixed],
-  company           : [Schema.Types.Mixed],
+  cliente           : { type : Schema.Types.Mixed },
+  company           : { type : Schema.Types.Mixed },
+  items             : { type : Array, default : [] },
+  legend            : { type : Schema.Types.Mixed },
   created_at        : { type: Date, default: Date.now },
   updated_at        : { type: Date, default: Date.now }
 });

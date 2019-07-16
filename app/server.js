@@ -64,6 +64,7 @@ require('./db/model/favoriteModel.js')(app, jwt);*/
 require('./db/model/productModel.js')(app, jwt);
 require('./db/model/categoryModel.js')(app, jwt);
 require('./db/model/companyModel.js')(app, jwt);
+require('./db/model/boletaModel.js')(app, jwt);
 
 var port = process.env.PORT || 3000;
 app.listen(port);
