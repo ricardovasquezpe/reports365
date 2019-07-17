@@ -41,8 +41,8 @@ module.exports = function(app, jwt){
   });
 
   app.get('/api/allboletas', function(req, res){
-    Boleta.find({}, {'__v': 0}).sort({serie: -1, correlativo: -1}).exec(function(err, boletas) { 
-
+    Boleta.find({}, {'__v': 0, 'tipoMoneda': 0, 'mtoOperGravadas': 0, 'mtoOperExoneradas': 0, 'mtoOperInafectas': 0, 'mtoIgv': 0, 'company': 0, 'legend': 0, 'updated_at': 0, 'items': 0})
+    .sort({serie: -1, correlativo: -1}).exec(function(err, boletas) { 
         if (!boletas){
             res.json(
               {"status" : false,

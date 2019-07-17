@@ -40,12 +40,12 @@ module.exports = function(app, jwt){
       );
       return;
 
-    });
+    });created_at
 
   });
 
   app.get('/api/allproducts', function(req, res){
-    Product.find().sort({name: -1}).exec(function(err, products) { 
+    Product.find({}, {__v: 0, updated_at: 0, created_at: 0}).sort({name: -1}).exec(function(err, products) { 
 
         if (!products){
             res.json(
