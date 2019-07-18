@@ -1,12 +1,13 @@
-var token = "";
+var token            = "";
 var myCompanyDetails = {};
-var myProducts = [];
-var productsBoleta = [];
-var productSelected = {};
+var myProducts       = [];
+var productsBoleta   = [];
+var productSelected  = {};
 
 $( document ).ready(function() {
     token  = getToken();
     moment.locale('es');
+    onlyAllowNumbers();
     init();
 });
 
@@ -58,9 +59,19 @@ function getMyCompanyDetails(){
         success: function(data){
             if(data.status){
                 myCompanyDetails = data.data;
+                putMyCompanyDetails();
             }
         }
     });
+}
+
+function putMyCompanyDetails(){
+    $("#name").val(myCompanyDetails.name);
+    $("#businessName").val(myCompanyDetails.businessName);
+    $("#ruc").val(myCompanyDetails.ruc);
+    $("#address").val(myCompanyDetails.address);
+    $("#telephone").val(myCompanyDetails.telephone);
+    $("#email").val(myCompanyDetails.email);
 }
 
 function getBoletas(){
@@ -109,59 +120,103 @@ function getBoletas(){
 }
 
 function createBoleta(){
-    var code      = $("#createProductCode").val();
-    var name      = $("#createProductName").val();
-    var price     = $("#createProductPrice").val();
-    var quantity  = $("#createProductQuantity").val();
-    var category  = $("#createProductSelectCategory").val();
-    var sendData  = {'code': code,'name':name,'price':price,'quantity':quantity,'category_id':category};
+    var serie       = $("#serie").val();
+    var correlativo = $("#correlativo").val();
+    var igv         = $("#correlativo").val();
+    if(!serie || !correlativo || !igv){
+        alert("Ingrese todos los campos obligatorios");
+        return;
+    }
+    var numeroDoc   = $("#numeroDoc").val();
+    var razonSocial = $("#razonSocial").val();
+    var direccion   = $("#direccion").val();
+    if(!numeroDoc || !razonSocial || !direccion){
+        alert("Ingrese todos los campos obligatorios");
+        return;
+    }
+    var company     = { "edited" : 0 };
+    if ($('#showCompany').is(":checked")){
+        var businessName = $("#businessName").val();
+        var name         = $("#name").val();
+        var ruc          = $("#ruc").val();
+        var address      = $("#address").val();
+        var email        = $("#email").val();
+        var telephone    = $("#telephone").val();
+        if(!businessName || !name || !ruc){
+            alert("Ingrese todos los campos obligatorios");
+            return;
+        }
+        company = {
+            "edited"          : 1,
+            "ruc"             : ruc,
+            "nombreComercial" : businessName,
+            "razonSocial"     : name,
+            "direccion"       : address,
+            "email"           : email,
+            "telefono"        : telephone
+        };
+    }
+    var sendData = {
+        "serie"       : serie,
+        "correlativo" : correlativo,
+        "mtoIgv"      : igv,
+        "cliente"     : {
+            "numeroDoc"   : numeroDoc,
+            "razonSocial" : razonSocial,
+            "direccion"   : direccion
+        },
+        "items" : productsBoleta,
+        "company" : company
+    }
+
     $.ajax({
         type : 'POST',
-        url : '/api/createproduct',
+        url : '/api/createboleta',
         headers: {
             'x-access-token': token
         }, 
         data : sendData,               
         dataType: "json",
         success: function(data){
-            if(data.status){
-                alert("Producto Creado");
-                $('#createProductModal').modal('toggle');
-                cleanCreateProductModal();
-                var htmlstring = "<tr>"+
-                                     "<td>"+code+"</td>"+
-                                     "<td>"+name+"</td>"+
-                                     "<td value='"+category+"'>"+getCategoryName(category)+"</td>"+
-                                     "<td>"+price+"</td>"+
-                                     "<td>"+quantity+"</td>"+
-                                     '<td class="text-center"><i class="mdi mdi-pencil-outline icon-md" style="cursor:pointer" onclick="getProductDetails(this, '+"'"+ data.data +"'"+')"></i></td>'
-                                   +"</tr>";
-                $("#mainTableProducts").prepend(htmlstring);
-            }else if(data.data){
-                alert("Complete los campos obligatorios");
-            }else{
-                alert("Hubo un error, porfavor actualize la página");
-            }
+            
         }
     });
 }
 
 function onSelectProduct(element){
+    if (element.value === ''){
+        $("#addProductQuantity").val("");
+        $("#addProductPrice").val("");
+        $("#addProductTotal").val(0);
+    }
     $.each( myProducts, function( index, product ){
         if(product._id == element.value){
             productSelected = product;
             $("#addProductPrice").val(product.price);
+            onChangeValueProduct();
+            return false;
         }
     });
+}
+
+function disableOptionSelectProduct(){
+    var option = $("option[value='" + element.value + "']", element);
+    option.attr("disabled","disabled");
+}
+
+function enableOptionSelectProduct(){
+    var option = $("option[value='" + element.value + "']", element);
+    option.attr("disabled","disabled");
 }
 
 function addProduct(){
     var quantity = $("#addProductQuantity").val();
     var price    = $("#addProductPrice").val();
     var igv      = $("#addProductIgv").val();
-    productsBoleta.push({codProducto: productSelected.code, 
-                         cantidad: quantity, 
+    productsBoleta.push({_id : productSelected._id,
+                         codProducto: productSelected.code, 
                          descripcion: productSelected.name, 
+                         cantidad: quantity, 
                          igv: igv,
                          mtoValorVenta: (quantity * price),
                          mtoValorUnitario : price});
@@ -175,29 +230,34 @@ function cleanAddProductModal(){
     $("#addProductQuantity").val("");
     $("#addProductPrice").val("");
     $("#addProductIgv").val("");
+    $("#addProductTotal").val(0);
 }
 
 function updateTableProducts(){
-    var rows = data.data.map((productsBoleta, index) => {
+    $('#tableProducts tbody').empty();
+    var rows = productsBoleta.map((product, index) => {
         var tds = [];
         tds.push($('<td>', {
-            text: productsBoleta.codProducto
+            text: product.codProducto
         }));
         tds.push($('<td>', {
-            text: moment(boleta.created_at).format('DD/MM/YYYY hh:mm')
+            text: product.descripcion
         }));
         tds.push($('<td>', {
-            text: boleta.cliente.razonSocial
+            text: product.cantidad
         }));
         tds.push($('<td>', {
-            text: "S/." + Number(boleta.mtoImpVenta).toFixed(2)
+            text: product.mtoValorUnitario
+        }));
+        tds.push($('<td>', {
+            text: "S/." + Number(product.mtoValorVenta).toFixed(2)
         }));
         tds.push($('<td>',{
             class: 'text-center',
             html: $('<i>', {
                 style: 'cursor:pointer',
-                class: 'mdi mdi-eye-outline icon-md',
-                onclick: 'getBoletaDetails(this, "'+ boleta._id +'")'
+                class: 'mdi mdi-delete-outline icon-md',
+                onclick: 'deleteProduct(this, "'+ product._id +'")'
             })
         }));
         return $('<tr>', {
@@ -206,4 +266,29 @@ function updateTableProducts(){
     });
 
     $("#tableProducts").append(rows);
+}
+
+function deleteProduct(element, id){
+    $(element).parent().parent().remove();
+    console.log(productsBoleta);
+    $.each( productsBoleta, function( index, product ){
+        if(product._id == id){
+            console.log(index);
+            productsBoleta.splice(index, 1);
+            return false;
+        }
+    });
+}
+
+function onChangeValueProduct(){
+    var quantity = $("#addProductQuantity").val();
+    var price    = $("#addProductPrice").val();
+    if(quantity && price){
+        var total = Number(quantity * price).toFixed(2);
+        $("#addProductTotal").val(total);
+    }
+}
+
+function showHideBussiness(){
+    $("#myBussinessContent").toggleClass('d-none');
 }

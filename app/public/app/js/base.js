@@ -11,3 +11,9 @@ function getToken(){
 function hideLoading(){
 	$(".fullloading").hide();
 }
+
+function onlyAllowNumbers(){
+	$(document).on("input", ".onlyNumeric", function() {
+	    this.value = this.value.replace(/\D/g,'');
+	});
+}
