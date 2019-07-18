@@ -40,7 +40,7 @@ module.exports = function(app, jwt){
       );
       return;
 
-    });created_at
+    });
 
   });
 
