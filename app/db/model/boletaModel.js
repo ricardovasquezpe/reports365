@@ -13,6 +13,22 @@ module.exports = function(app, jwt){
       return;
     }
 
+    if(req.body.edited == 0){
+
+    }else{
+
+    }
+
+    req.body.tipoMoneda = "PEN";
+    req.body.mtoOperGravadas = 10;
+    req.body.mtoOperExoneradas = 20;
+    req.body.mtoOperInafectas = 30;
+    req.body.mtoImpVenta = 40;
+    req.body.legend = {
+      "codigo" : 1000,
+      "value" : "Son 10 solcitos"
+    };
+
     var newBoleta = Boleta(req.body);
     newBoleta.save(function(err) {
       if (err){

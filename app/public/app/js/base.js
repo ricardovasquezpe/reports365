@@ -17,3 +17,12 @@ function onlyAllowNumbers(){
 	    this.value = this.value.replace(/\D/g,'');
 	});
 }
+
+function isObjectEmpty(obj) {
+    for(var prop in obj) {
+        if(obj.hasOwnProperty(prop))
+            return false;
+    }
+
+    return true;
+}

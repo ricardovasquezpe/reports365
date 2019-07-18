@@ -156,6 +156,9 @@ function createBoleta(){
             "telefono"        : telephone
         };
     }
+    if(productsBoleta.length == 0){
+        alert("Ingrese por lo menos 1 producto");
+    }
     var sendData = {
         "serie"       : serie,
         "correlativo" : correlativo,
@@ -185,6 +188,7 @@ function createBoleta(){
 
 function onSelectProduct(element){
     if (element.value === ''){
+        productSelected = {};
         $("#addProductQuantity").val("");
         $("#addProductPrice").val("");
         $("#addProductTotal").val(0);
@@ -213,12 +217,16 @@ function addProduct(){
     var quantity = $("#addProductQuantity").val();
     var price    = $("#addProductPrice").val();
     var igv      = $("#addProductIgv").val();
-    productsBoleta.push({_id : productSelected._id,
-                         codProducto: productSelected.code, 
-                         descripcion: productSelected.name, 
-                         cantidad: quantity, 
-                         igv: igv,
-                         mtoValorVenta: (quantity * price),
+    if(isObjectEmpty(productSelected) || !quantity || !price){
+        alert("Ingrese todos los campos");
+        return;
+    }
+    productsBoleta.push({_id              : productSelected._id,
+                         codProducto      : productSelected.code, 
+                         descripcion      : productSelected.name, 
+                         cantidad         : quantity, 
+                         igv              : igv,
+                         mtoValorVenta    : (quantity * price),
                          mtoValorUnitario : price});
     $('#addProduct').modal('toggle');
     updateTableProducts();
@@ -226,6 +234,7 @@ function addProduct(){
 }
 
 function cleanAddProductModal(){
+    productSelected = {};
     $("#addProductSelectProduct").val("");
     $("#addProductQuantity").val("");
     $("#addProductPrice").val("");
