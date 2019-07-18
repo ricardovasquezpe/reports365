@@ -181,9 +181,27 @@ function createBoleta(){
         data : sendData,               
         dataType: "json",
         success: function(data){
-            
+            if(data.status){
+                $('#createBoleta').modal('toggle');
+                cleanAddBoletaModal();
+            }
         }
     });
+}
+
+function cleanAddBoletaModal(){
+    $("#serie").val("");
+    $("#correlativo").val("");
+    $("#igv").val("");
+    $("#numeroDoc").val("");
+    $("#razonSocial").val("");
+    $("#direccion").val("");
+    $('#showCompany').prop('checked', false);
+    putMyCompanyDetails();
+    cleanAddProductModal();
+    productsBoleta   = [];
+    updateTableProducts();
+    showHideBussiness();
 }
 
 function onSelectProduct(element){
@@ -226,7 +244,7 @@ function addProduct(){
                          descripcion      : productSelected.name, 
                          cantidad         : quantity, 
                          igv              : igv,
-                         mtoValorVenta    : (quantity * price),
+                         mtoValorVenta    : Number((quantity * price)).toFixed(2),
                          mtoValorUnitario : price});
     $('#addProduct').modal('toggle');
     updateTableProducts();
@@ -259,7 +277,7 @@ function updateTableProducts(){
             text: product.mtoValorUnitario
         }));
         tds.push($('<td>', {
-            text: "S/." + Number(product.mtoValorVenta).toFixed(2)
+            text: "S/." + product.mtoValorVenta
         }));
         tds.push($('<td>',{
             class: 'text-center',
@@ -279,7 +297,6 @@ function updateTableProducts(){
 
 function deleteProduct(element, id){
     $(element).parent().parent().remove();
-    console.log(productsBoleta);
     $.each( productsBoleta, function( index, product ){
         if(product._id == id){
             console.log(index);
