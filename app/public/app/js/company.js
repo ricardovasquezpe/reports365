@@ -1,7 +1,10 @@
 var token = "";
 
-$( document ).ready(function() {
+window.onload = function() {
     token  = getToken();
+}
+
+$( document ).ready(function() {
     moment.locale('es');
     init();
 });

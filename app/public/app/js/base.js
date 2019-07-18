@@ -26,3 +26,8 @@ function isObjectEmpty(obj) {
 
     return true;
 }
+
+function logout(){
+	localStorage.clear();
+	getToken();
+}

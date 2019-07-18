@@ -99,13 +99,26 @@ function getBoletas(){
                     tds.push($('<td>', {
                         text: "S/." + Number(boleta.mtoImpVenta).toFixed(2)
                     }));
+                    tds.push($('<td>', {
+                        class: 'text-center',
+                        html:   $('<label>', {
+                                    style: 'cursor:pointer',
+                                    class: 'badge badge-danger',
+                                    text : 'Pendiente'
+                                })
+                    }));
                     tds.push($('<td>',{
                         class: 'text-center',
-                        html: $('<i>', {
-                            style: 'cursor:pointer',
-                            class: 'mdi mdi-eye-outline icon-md',
-                            onclick: 'getBoletaDetails(this, "'+ boleta._id +'")'
-                        })
+                        html:   [$('<i>', {
+                                    style: 'cursor:pointer',
+                                    class: 'mdi mdi-eye-outline icon-md',
+                                    onclick: 'getBoletaDetails(this, "'+ boleta._id +'")'
+                                }),
+                                $('<i>', {
+                                    style: 'cursor:pointer',
+                                    class: 'mdi mdi-folder-download icon-md ml-1',
+                                    onclick: 'generateFiles(this, "'+ boleta._id +'")'
+                                })]
                     }));
                     return $('<tr>', {
                         html: tds
