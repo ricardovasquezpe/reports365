@@ -9,7 +9,7 @@ module.exports = function(app, jwt){
   });
 
   app.get('/es', function(req, res, next) {
-    res.render('indexes', { title: 'Express' });
+    res.render('index', { title: 'Express' });
   });
 
 }
